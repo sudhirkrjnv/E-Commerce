@@ -1,0 +1,45 @@
+body{
+    background-color: white;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+}
+.registerbox{
+    margin-top: 50px;
+    width: 400px;
+    height: 470px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px 5px;
+}
+.boxes{
+    border: 0.1px solid #949494;
+    background-color: #FFFFFF;
+    width: 350px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.continue{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFD814;
+    border: 0.1px solid #FFD814;
+    width: 352px;
+    height: 28px;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.loginhere{
+    background-color: #E6E6E6;
+    border: 0.1px solid #E6E6E6;
+    width: 380px;
+    height: 28px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -8px;
+}

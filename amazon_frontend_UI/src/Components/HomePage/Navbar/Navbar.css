@@ -1,0 +1,130 @@
+body{
+    background-color: rgb(227, 230, 230);
+    padding: 0px;
+    margin: 0px;
+}
+.mainbox{
+    background-color: #131921;
+    height: 60px;
+    width: 100vw;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.leftpart{
+    display: flex;
+}
+.logobox{
+    display: flex;
+    margin-top: 12px;
+    margin-right: 0px;
+}
+.logo{
+	background: url('https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/amazon_sprit_image.png?updatedAt=1703862230748') no-repeat -20px -458px;
+	width: 142px;
+	height: 44px;
+    transform: scale(0.8);
+    margin-top: 2px;
+}
+.textinlogo{
+    position: relative;
+    left: -10px;
+    bottom: -12px;
+}
+.addressbox{
+    display: flex;
+    margin-top: 12px;
+    margin-right: 12px;
+}
+.locationlogo {
+	background: url('https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/amazon_sprit_image.png?updatedAt=1703862230748') no-repeat -142px -758px;
+	width: 29px;
+	height: 33px;
+    transform: scale(0.6);
+    position: relative;
+    bottom: -11px;
+    right: -4px;
+}
+.addresstextbottom{
+    position: relative;
+    top: -15px;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.searchbox{
+    width: 830px;
+    height: 42px;
+    display: flex;
+    margin-top: 12px;
+    margin-right: 12px;
+}
+.selectbox{
+    width: 52px;
+    height: 42px;
+    background-color: #E6E6E6;
+    border-radius: 8px 0px 0px 8px;
+    display: flex;
+}
+.selectitems{
+    margin: auto;
+}
+.searchhere{
+    width: 736px;
+    height: 42px;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.searchiconbox{
+    background-color: #FEBD69;
+    border-radius: 0px 8px 8px 0px;
+}
+.searchicon{
+	background: url('https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/amazon_sprit_image.png?updatedAt=1703862230748') no-repeat -20px -580px;
+	width: 42px;
+	height: 42px;
+    transform: scale(0.6);
+}
+.rightpart{
+    display: flex;
+}
+.accountbox{
+    margin-top: 8px;
+    margin-right: 15px;
+}
+.textbottom{
+    font-size: 18px;
+    font-weight: bolder;
+}
+.ordersbox{
+    margin-top: 8px;
+    margin-right: 15px;
+}
+.cartbox{
+    display: flex;
+    align-items: center;
+}
+.cartlogo{
+	background: url('https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/amazon_sprit_image.png?updatedAt=1703862230748') no-repeat -20px -680px;
+	width: 76px;
+	height: 52px;
+    transform: scale(0.7);
+}
+.cartitem{
+    position: relative;
+    left: -38px;
+    top: -12px;
+    font-size: 18px;
+    color: #FFA41C;
+}
+.carttext{
+    position: relative;
+    left: -20px;
+    bottom: -8px;
+}
+
+
+

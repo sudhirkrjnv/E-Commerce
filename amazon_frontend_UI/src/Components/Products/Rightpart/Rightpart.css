@@ -1,0 +1,33 @@
+.rightpartcontainer{
+    width: 1230px;
+    height: 300px;
+    background-color: white;
+    border: 1px solid #F7F7F7;
+    border-radius: 8px;
+    display: flex;
+}
+.productimagebox{
+    width: 240px;
+    height: 300px;
+    background-color: #F7F7F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productimagebox img{
+    transform: scale(0.6);
+}
+.shortdetails{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.addincart{
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 32px;
+    background-color: #FFD814;
+    border-radius: 20px;
+}

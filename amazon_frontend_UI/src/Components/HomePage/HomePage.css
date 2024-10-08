@@ -1,0 +1,44 @@
+body{
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+}
+.bannerbox{
+    height: 100vh;
+    width: 100vw;
+    background-color: #E3E6E6;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 420px;
+}
+.banner {
+    background-image: url(https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/slider_image/Prime-PC-3000._CB580118080_.jpg?updatedAt=1709413108712);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90vh;
+    width: 99vw;
+}
+.mask {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 280px, #E3E6E6);
+}
+.bundledbox{
+    justify-content: center;
+    position: absolute;
+    top: 370px;
+}
+
+.typeone{
+    width: 350px;
+    height: 420px;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,14 @@
+.secondpartcontainer{
+    width: 460px;
+    margin-top: 50px;
+}
+.producttitle{
+    font-size: 30px;
+}
+.about ul li{
+    font-size: 18px;
+}
+.border{
+    border-bottom: 1px solid #BBBFBF;
+    padding-bottom: 10px;
+}

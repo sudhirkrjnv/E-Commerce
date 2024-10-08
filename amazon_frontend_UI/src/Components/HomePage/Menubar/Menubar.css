@@ -1,0 +1,37 @@
+body{
+    color: brown;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+.menubarbox{
+    display: flex;
+    height: 40px;
+    width: 100vw;
+    background-color: #232F3E;
+    color: white;
+    align-items: center;
+    padding-left: 12px;
+}
+.all{
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+}
+.threeline{
+	background: url('https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/amazon_sprit_image.png?updatedAt=1703862230748') no-repeat -344px -510px;
+	width: 35px;
+	height: 28px;
+    transform: scale(0.6);
+}
+.alltext{
+    position: relative;
+    bottom: -4px;
+}
+.menuchilds ul{
+    display: flex;
+    list-style-type: none;
+}
+ul li{
+    margin-right: 18px;
+}

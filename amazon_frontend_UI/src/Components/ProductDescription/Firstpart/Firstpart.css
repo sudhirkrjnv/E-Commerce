@@ -1,0 +1,13 @@
+.firstpartcontainer{
+    width: 750px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.firstpartcontainer img{
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.7);
+}

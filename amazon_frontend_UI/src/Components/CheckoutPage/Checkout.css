@@ -1,0 +1,6 @@
+.cartcontents{
+    display: flex;
+}
+.leftcontainer{
+    width: 1100px;
+}

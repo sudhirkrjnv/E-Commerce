@@ -1,0 +1,47 @@
+.paycontainer{
+    width: 245px;
+    height: 220px;
+    border: 1px solid #BFBBB5;
+    border-radius: 8px;
+    margin-top: 80px;
+    margin-left: 80px;
+}
+.summarybox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #BFBBB5;
+}
+.pay{
+    width: 205px;
+    height: 30px;
+    background-color: #FFA41C;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: green;
+    cursor: pointer;
+}
+.emptycontainer{
+    width: 205px;
+    height: 30px;
+    background-color: #c7c4c0;
+    color: red;
+    font-weight: bolder;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 40px;
+    cursor: pointer;
+}
