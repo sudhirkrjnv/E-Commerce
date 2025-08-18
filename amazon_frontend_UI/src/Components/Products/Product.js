@@ -3,56 +3,28 @@ import Rightpart from './Rightpart/Rightpart';
 import './Product.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Product(){
 
-    const ratingHandlers=(rating)=>{
-        if(rating === 4){
-            alert("Rating 4 is Clicked");
-        } else if(rating === 3){
-            alert("Rating 3 is Clicked");
-        } else if(rating === 2){
-            alert("Rating 2 is Clicked");
-        } else if(rating === 1){
-            alert ("Rating 1 is Clicked");
-        }   
-    }
-
-    const brandHandlers=(brand)=>{
-        if(brand === 'redmi'){
-            alert("Redmi is Selected");
-        } else if(brand ==='realme'){
-            alert("realme is Selected");
-        } else if(brand ==='Samsung'){
-            alert("Samsung is Selected");
-        } else if(brand ==='iphone'){
-            alert("iphone is Selected");
-        } else if(brand ==='iQOO'){
-            alert("iQOO is Selected");
-        } else if(brand ==='OnePlus'){
-            alert("OnePlus is Selected");
-        } else if(brand ==='Xiaomi'){
-            alert("Xiaomi is Selected");
-        } else if(brand ==='POCO'){
-            alert("POCO is Selected");
-        }  
-    }
+    let { type } = useParams();
+    //console.log(type);
 
     let items=[
         {
-            id:'01', img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+            id:'01', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"redmi", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4', brought:'2k+', price:'4,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
         },
         {
-            id:'02', img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+            id:'02', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"realme", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'3', brought:'2k+', price:'3,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
         },
         {
-            id:'03', img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+            id:'03', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"Samsung", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'2', brought:'2k+', price:'2,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
         },
         {
-            id:'04', img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+            id:'04', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iphone", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'1', brought:'2k+', price:'1,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
         }, 
         {
-            id:'05', img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+            id:'05', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iQOO", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
         } 
     ]
    
@@ -60,45 +32,49 @@ function Product(){
                img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4.5', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
             }*/
     
+    let item = items.filter((item) => item.type === type);
 
-    let [listsofitem, setlistofitem]= useState([]);
+    const [listsOfitem, setlistOfitem]= useState([]);
+    const [selectedBrand, setSelectedBrand] = useState([]);
 
     useEffect(()=>{
-        const getproducts = async () => {
-            try {
-                const response = await axios.get('http://localhost:8085/getproducts/');
-                setlistofitem(response.data);
-            } catch (error) {
-                console.log("error "+ error.message);
-            }
-        };
-        //getproducts();
+        // const getproducts = async () => {
+        //     try {
+        //         const response = await axios.get('http://localhost:8085/getproducts/');
+        //         setlistofitem(response.data);
+        //     } catch (error) {
+        //         console.log("error "+ error.message);
+        //     }
+        // };
+        // //getproducts();
 
-        setlistofitem(items);
+        setlistOfitem(item);
 
-    },[]);
-            
+    },[type]);
+
+    const brands = [...new Set(listsOfitem.map(item=>item.brand))];
+    //console.log(brands);
+
+    const filteredItem = selectedBrand.length > 0 
+        ? listsOfitem.filter(item=>selectedBrand.includes(item.brand)) 
+        : listsOfitem ;
 
     return(
         <>
-            <div>
-                <button onClick={()=>{
-                    const filteredProduct = listsofitem.filter(item => item.stars >= 4);
-                    setlistofitem(filteredProduct);
-                }}>Click here</button>
-            </div>
             <div className='mainboxcontainer'>
-                <Leftpart ratingHandlers={ratingHandlers} brandHandlers={brandHandlers} />
+                <Leftpart brands={brands} selectedBrand={selectedBrand} setSelectedBrand={setSelectedBrand} />
                 <div>
                     <div style={{ fontWeight: 'bolder',  marginTop:'30px', fontSize:'1.3em'}}>Results</div>
                     {/*
                     <Rightpart img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
                 */}
+                    <div className='scrollingItem' style={{display:'flex', flexDirection:'column', overflowY:'scroll', scrollBehavior:'smooth', height:'100vh'}}>
+                        {   filteredItem.map((item) => (
+                                <Rightpart key={item.id} id={item.id} img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
+                            ))
+                        }
+                    </div>
 
-                {   listsofitem.map((item) => (
-                        <Rightpart  id={item.id} img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
-                    ))
-                }
 
                 </div>
             </div>

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './Thirdpart.css'
 
 function Thirdpart(props){
+
     return(
         <div>
             <div className='thirdpartcontainer1'>

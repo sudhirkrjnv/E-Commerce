@@ -2,12 +2,15 @@ import './Leftpart.css'
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 
-function Leftpart({ratingHandlers, brandHandlers}){
+function Leftpart({brands, selectedBrand, setSelectedBrand}){
 
-
-    const brands=[
-        {name:'redmi'}, {name:'realme'}, {name:'Samsung'}, {name:'iphone'}, {name:'iQOO'},{name:'OnePlus'}, {name:'Xiaomi'}, {name:'POCO'}
-    ]
+    const handleBrandChange = (brand)=>{
+        if(selectedBrand.includes(brand)){
+            setSelectedBrand(selectedBrand.filter(item => item !== brand ));
+        } else {
+            setSelectedBrand([...selectedBrand, brand]);
+        }
+    }
 
     return(
         <>
@@ -24,7 +27,7 @@ function Leftpart({ratingHandlers, brandHandlers}){
                                 {
                                     [4, 3, 2, 1].map((rating, index) => {
                                         return(
-                                            <div onClick={()=>ratingHandlers(rating)} style={{ display: 'flex', alignItems: 'center' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center' }}>
                                                 <Rating  name="rating-read-only" defaultValue={rating} precision={0.1} readOnly size="small" />
                                                 <span style={{ marginLeft: '0.5em' }}>& Up</span>
                                             </div>
@@ -61,7 +64,7 @@ function Leftpart({ratingHandlers, brandHandlers}){
                             brands.map((brand, index) => {
                                 return(
                                     <>
-                                        <input onClick={()=>brandHandlers(brand.name)} type='checkbox' id={brand.name} name={brand.name} value={brand.name} /><label>{brand.name}</label><br/>
+                                        <input type='checkbox' id={brand} name={brand} value={brand} checked={selectedBrand.includes(brand)} onChange={() => handleBrandChange(brand)}/><label>{brand}</label><br/>
                                     </>
                                 )
                             })

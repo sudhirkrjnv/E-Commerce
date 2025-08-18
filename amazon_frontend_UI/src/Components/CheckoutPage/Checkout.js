@@ -1,21 +1,17 @@
 import Buynow from './Buynowcontainer/Buynow';
 import Cartitems from './Cartitems/Cartitems';
 import './Checkout.css'
-import { useContext } from 'react';
-import { CartContext } from '../CartContext';
+import { useSelector } from 'react-redux';
 
 function Checkout(){
-    const {item, size, increment, decrement, emptyCart} = useContext(CartContext);
 
-    const cartValue = function(){
-        let price = 0;
-        for(let i=0;i<item.length;i++){
-            const itemPrice = parseFloat(item[i].price.replace(/,/g, ""));
-            //price += itemPrice;
-            price += itemPrice * item[i].quantity;
-        }
-        return price.toLocaleString();
-    }
+    const {cart} = useSelector(store=>store.cart);
+
+    let totalPrice = 0;
+    cart.forEach(item => {
+        const price = parseFloat((item.price).replace(/,/g, ""));
+        totalPrice += price * (item.quantity);
+    });
 
     return(
         <>
@@ -23,11 +19,15 @@ function Checkout(){
                 <h1>Checkout</h1>
             </div>
             <div className='cartcontents'>
-                <div className='leftcontainer'>
+                <div className='leftcontainer scrollingItem' style={{overflowY:'scroll', height:'82vh'}}>
                     {
-                        item.map((value)=>(
-                            <Cartitems id={value.id} name={value.name} img={value.img} stars={value.stars} price={value.price} mrp={value.mrp} off={value.off} flatoff={value.flatoff} card={value.card} delivery={value.delivery} availibility={value.availibility} minus={()=>decrement(value)} plus={()=>increment(value)} quantity={value.quantity} />
-                        ))
+                        cart.map((value)=>{
+                            return (
+                                <Cartitems key={value.id} id={value.id} name={value.name} img={value.img} stars={value.stars} price={value.price} mrp={value.mrp} off={value.off} flatoff={value.flatoff} card={value.card} delivery={value.delivery} availibility={value.availibility}  
+                                quantity={value.quantity} 
+                                />
+                            )
+                        })
                     }
                     {/*<Cartitems/>
                     <Cartitems/>
@@ -37,7 +37,7 @@ function Checkout(){
                     <Cartitems/>*/}
                 </div>
                 <div>
-                    <Buynow subtotalamount= {cartValue()} size={size} empty={emptyCart} />
+                    <Buynow size={cart.length} items={cart} subtotalamount= {totalPrice}/>
                 </div>
 
             </div>

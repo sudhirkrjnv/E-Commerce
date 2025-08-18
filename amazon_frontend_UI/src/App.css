@@ -8,3 +8,6 @@ body{
 .link:hover{
     text-decoration: none;
 }
+.scrollingItem::-webkit-scrollbar{
+    display: none;
+}

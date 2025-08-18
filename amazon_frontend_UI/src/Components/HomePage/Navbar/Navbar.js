@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import "./Navbar.css";
-import { CartContext } from "../../CartContext";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const { item, size, increment } = useContext(CartContext);
+  const {cart} = useSelector(store=>store.cart);
 
   return (
     <>
@@ -46,7 +45,7 @@ function Navbar() {
           <Link className="link" to="/checkout/">
             <diV className="cartbox">
               <div className="cartlogo"></div>
-              <div className="cartitem">{size}</div>
+              <div className="cartitem">{cart.length}</div>
               <div className="carttext textbottom">cart</div>
             </diV>
           </Link>

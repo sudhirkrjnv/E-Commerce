@@ -32,7 +32,7 @@ body{
     top: 370px;
 }
 
-.typeone{
+.homeboxes{
     width: 350px;
     height: 420px;
     background-color: white;
@@ -41,4 +41,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
+    color: inherit;
 }

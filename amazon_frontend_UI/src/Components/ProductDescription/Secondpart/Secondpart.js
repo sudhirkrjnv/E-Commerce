@@ -25,18 +25,20 @@ function Secondpart(props){
                     <div className='pricetag' style={{fontSize:'30px'}}>{props.price}</div>
                     <div className='percoff' style={{marginTop:'10px', fontSize:'1.2em'}}>&nbsp;M.R.P: ₹{props.mrp} ({props.off} % off)</div>
                 </div>
-                <div className='about'><div style={{fontSize:'1.5em', fontWeight:'bold' , position:'relative', bottom:'-10px'}}>About this item</div>
-                    <ul>
-                        {/*<li>{props.about}</li>*/}
-                        
-                        {
-                            props.about != undefined &&
-                            props.about.map((abouts)=>(
-                                <li>{abouts}</li>
-                            ))
-                        }
-                        
-                    </ul>
+                <div className='about'><div style={{fontSize:'1.5em', fontWeight:'bold' , position:'relative', bottom:'-10px', paddingBottom:'10px'}}>About this item</div>
+                    <div className='scrollingItem' style={{display:'flex', height:'40vh', overflowY:'scroll'}}>
+                        <ul>
+                            {/*<li>{props.about}</li>*/}
+                            
+                            {
+                                props.about != undefined &&
+                                props.about.map((abouts)=>(
+                                    <li>{abouts}</li>
+                                ))
+                            }
+                            
+                        </ul>
+                    </div>
 
                 </div>
             </div>
