@@ -2,6 +2,9 @@ body{
     background-color: white;
     margin: 0px;
     padding: 0px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .bannerbox{
     height: 100vh;
@@ -29,7 +32,7 @@ body{
 .bundledbox{
     justify-content: center;
     position: absolute;
-    top: 370px;
+    top: 390px;
 }
 
 .homeboxes{
@@ -38,9 +41,6 @@ body{
     background-color: white;
     margin: auto;
     margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
-    color: inherit;
+    color: black;
 }
