@@ -1,30 +1,51 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
+import axios from "axios";
 
 function Login() {
 
-  const[logindata, setLogindata] = useState({
-    Email:"",
-    Password:""
+  const [input, setInput] = useState({
+    email: "", password: ""
   });
-  console.log(logindata);
+
+  const inputHandler = (e)=>{
+    setInput({ ...input, [e.target.name]: e.target.value });
+  }
+
+  const submitHandler = async(e)=>{
+    e.preventDefault();
+    //console.log(input);
+    try {
+      const res = await axios.post('http://localhost:8000/api/v1/user/login', input, 
+        {
+          headers:{'Content-Type':'application/json'}, 
+          withCredentials:true
+        }
+      )
+      if(res.data.success){
+        console.log(res.data.message);
+      }
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+  }
 
   return (
     <>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="loginbox">
           <p style={{marginTop: "10px", marginLeft: "20px", fontSize: "1.5em", fontWeight: "bold", }}> Sign in </p>
-          <form style={{ marginTop: "10px", marginLeft: "20px" }}>
+          <form style={{ marginTop: "10px", marginLeft: "20px" }} onSubmit={submitHandler}>
             <div>
               <label>Email</label><br />
-              <input className="inputboxes" onChange={(e)=>setLogindata({...logindata, Email:e.target.value})} value={logindata.Email} type="text" name="email" id="email" />
+              <input className="inputboxes" type="text" name="email" id="email" value={input.email} onChange={inputHandler} />
             </div><br />
             <div>
-              <label>Password</label><br />
-              <input className="inputboxes" onChange={(e)=>setLogindata({...logindata, Password:e.target.value})} value={logindata.Password} type="password" name="password" id="password" />
+              <label>Password</label><br/>
+              <input className="inputboxes" type="password" name="password" id="password" value={input.password} onChange={inputHandler} />
             </div> <br />
-            <button className="continuetologin">Continue</button>
+            <button className="continuetologin" type="submit">Continue</button>
           </form>
         </div>
       </div>

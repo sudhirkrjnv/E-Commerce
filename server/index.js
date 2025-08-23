@@ -2,20 +2,26 @@ import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose";
 import userRoute from "./routes/user.routes.js";
+import cors from "cors"
 
 dotenv.config({})
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6000;
 
 app.get('/', (_, res)=>{
     return res.status(200).json({
-        success:    'true',
-        message: "I'm comming from backend",
+        success: 'true',
+        message: "Welcome to the server of Amazon crated by TrueService, this belongs to Sudhir Kumar",
     })
 })
 app.use(express.json());
+const corsOption = {
+    origin:'http://localhost:3000',
+    credentials:true
+}
+app.use(cors(corsOption));
 app.use("/api/v1/user", userRoute);
 app.listen(PORT, ()=>{
     try {
