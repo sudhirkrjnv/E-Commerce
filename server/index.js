@@ -7,7 +7,7 @@ dotenv.config({})
 
 const app = express();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 app.get('/', (_, res)=>{
     return res.status(200).json({
@@ -15,6 +15,7 @@ app.get('/', (_, res)=>{
         message: "I'm comming from backend",
     })
 })
+app.use(express.json());
 app.use("/api/v1/user", userRoute);
 app.listen(PORT, ()=>{
     try {
