@@ -1,19 +1,27 @@
-require("dotenv").config();
-const express = require("express");
+import express from "express"
+import dotenv from "dotenv"
+import mongoose from "mongoose";
+import userRoute from "./routes/user.routes.js";
+
+dotenv.config({})
+
 const app = express();
-require("./src/db/connection");
-const cors = require("cors");
-const Defaultdata = require("./src/Defaultdata");
-const router = require("./src/routes/router");
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
-app.use(express.json());
-app.use(cors());
-
-Defaultdata();
-app.use(router);
-
-app.listen(port, () => {
-    console.log(`server is running on port ${port}`);
-});
+app.get('/', (_, res)=>{
+    return res.status(200).json({
+        success:    'true',
+        message: "I'm comming from backend",
+    })
+})
+app.use("/api/v1/user", userRoute);
+app.listen(PORT, ()=>{
+    try {
+        mongoose.connect(process.env.MONGO_URI);
+        console.log("Database connected successfully");
+    } catch (error) {
+        console.error("Database connection failed")
+    }
+    console.log(`app is listening on PORT ${PORT}`);
+})
