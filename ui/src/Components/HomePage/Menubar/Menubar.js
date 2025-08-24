@@ -24,7 +24,7 @@ function Menubar(){
                     <li>Costomer Service</li>
                     <li>Sudhir's Amazon.in</li>
                     <Link className='link' to='/product/mobiles'><li>Mobiles</li></Link>
-                    <li>Best Sellers</li>
+                    <Link className='link' to='/admin'><li>Seller login</li></Link>
                 </ul>
             </div>
         </div>
