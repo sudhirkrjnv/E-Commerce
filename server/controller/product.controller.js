@@ -40,3 +40,16 @@ export const getProductByCategories = async(req, res)=>{
         console.error(error);
     }
 }
+export const getProductById = async(req, res)=>{
+    try {
+        const {id} = req.params;
+
+        const product = await Product.findById(id);
+        if(!product) return res.status(404).json({message: 'No product found', success:false});
+
+        return res.status(200).json({product, success:true});
+
+    } catch (error) {
+        console.error(error);
+    }
+}
