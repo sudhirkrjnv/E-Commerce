@@ -4,29 +4,35 @@ import './Product.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setProducts } from '../../redux/productSlice';
 
 function Product(){
 
     let { type } = useParams();
     //console.log(type);
+    const items = useSelector(store=>store.products.products) || [];
+    //console.log(items);
 
-    let items=[
-        {
-            id:'01', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"redmi", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4', brought:'2k+', price:'4,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
-        },
-        {
-            id:'02', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"realme", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'3', brought:'2k+', price:'3,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
-        },
-        {
-            id:'03', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"Samsung", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'2', brought:'2k+', price:'2,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
-        },
-        {
-            id:'04', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iphone", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'1', brought:'2k+', price:'1,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
-        }, 
-        {
-            id:'05', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iQOO", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
-        } 
-    ]
+    const dispatch = useDispatch();
+
+    // let items=[
+    //     {
+    //         id:'01', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"redmi", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4', brought:'2k+', price:'24,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+    //     },
+    //     {
+    //         id:'02', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"realme", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'3', brought:'2k+', price:'23,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+    //     },
+    //     {
+    //         id:'03', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"Samsung", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'2', brought:'2k+', price:'2,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+    //     },
+    //     {
+    //         id:'04', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iphone", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'1', brought:'2k+', price:'1,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+    //     }, 
+    //     {
+    //         id:'05', type:"mobiles", img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', brand:"iQOO", name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'0', brought:'2k+', price:'999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
+    //     }
+    // ]
    
     /*let item={ 
                img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4.5', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
@@ -38,19 +44,21 @@ function Product(){
     const [selectedBrand, setSelectedBrand] = useState([]);
 
     useEffect(()=>{
-        // const getproducts = async () => {
-        //     try {
-        //         const response = await axios.get('http://localhost:8085/getproducts/');
-        //         setlistofitem(response.data);
-        //     } catch (error) {
-        //         console.log("error "+ error.message);
-        //     }
-        // };
-        // //getproducts();
+        const getproducts = async () => {
+            try {
+                const res = await axios.get('http://localhost:8000/api/v1/product/getProduct');
+                if(res.data.success){
+                    dispatch(setProducts(res.data.products));
+                }
+            } catch (error) {
+                console.error(error.response.data.message);
+            }
+        };
+        getproducts();
 
         setlistOfitem(item);
 
-    },[type]);
+    },[dispatch, type]);
 
     const brands = [...new Set(listsOfitem.map(item=>item.brand))];
     //console.log(brands);
@@ -69,13 +77,15 @@ function Product(){
                     <Rightpart img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
                 */}
                     <div className='scrollingItem' style={{display:'flex', flexDirection:'column', overflowY:'scroll', scrollBehavior:'smooth', height:'100vh'}}>
-                        {   filteredItem.map((item) => (
-                                <Rightpart key={item.id} id={item.id} img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
-                            ))
+                        {   
+                            filteredItem.map((item, index) => {
+                                console.log(item);
+                                return (
+                                    <Rightpart key={item._id} id={item._id} img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
+                                );
+                            })
                         }
                     </div>
-
-
                 </div>
             </div>
         </>

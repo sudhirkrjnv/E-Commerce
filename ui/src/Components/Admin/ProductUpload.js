@@ -1,21 +1,34 @@
-import axios from 'axios'
-import React from 'react'
 import { useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import { addProduct } from '../../redux/productSlice.js';
+import axios from 'axios';
 
 function ProductUpload() {
+
+    const dispatch = useDispatch();
+    
+    const products = useSelector(store=>store.products.products) || [];
+    console.log(products);
 
     const [input, setInput] = useState({
         type:"", 
         img:"", 
         brand:"", 
         name:"",
-        stars:'', 
-        bought:'', 
+        stars:'',
+        ratings:"",
+        bought:'',
         price:'', 
         mrp:'', 
         off:'', 
         flatoff:'', 
-        card:''
+        card:'',
+        emi:"",
+        withexchange: "",
+        withoutexchange: "",
+        delivery: "",
+        availability: "",
+        about: "" // comma-separated string, and after that it will be sent as an array
     })
 
     const inputHandler = (e)=>{
@@ -25,8 +38,12 @@ function ProductUpload() {
     const submitHandler = async(e)=>{
         e.preventDefault();
         console.log(input);
+        const formattedProduct = {
+            ...input,
+            about: input.about ? input.about.split(",").map(item => item.trim()) : []
+        }
         try {
-            const res = await axios.post('', input, {
+            const res = await axios.post('', formattedProduct, {
                 headers:{'Content-Type':'application/json'},
                 withCredentials: true
             })
@@ -36,6 +53,11 @@ function ProductUpload() {
         } catch (error) {
             console.error(error.response.data.message);
         }
+
+        dispatch(addProduct(formattedProduct));
+
+        setInput({type:"", img:"", brand:"", name:"", stars:'', ratings:"", bought:'', price:'', mrp:'', off:'', flatoff:'', card:'', emi:"", withexchange: "", withoutexchange: "", delivery: "", availability: "", about: ""});
+    
     }
 
     return (

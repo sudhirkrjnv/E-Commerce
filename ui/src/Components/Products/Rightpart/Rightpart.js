@@ -18,7 +18,7 @@ function Rightpart(props){
                     <img src={props.img}/>
                 </div>
                 <div className='shortdetails'>
-                    <div style={{fontSize:'1.2em', fontWeight:'bold'}} className='itemtitle'><Link className='link' to={'/productdescription/'+props.id}>{props.name}</Link></div><br/>
+                    <div style={{fontSize:'1.2em', fontWeight:'bold'}} className='itemtitle'><Link className='link' to={'/productdescription/'+props._id}>{props.name}</Link></div><br/>
                     <div className='ratings&reviews'>
                         <Stack spacing={1}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
