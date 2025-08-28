@@ -19,7 +19,7 @@ function Cartitems(props){
                     <div className='ratings&reviews'>
                         <Stack spacing={1}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Rating name="rating-read-only" defaultValue={props.stars} precision={0.1} readOnly size="medium" />
+                                <Rating name="rating-read-only" defaultValue={Number(props.stars)} precision={0.1} readOnly size="medium" />
                             </div>
                         </Stack>
                     </div>

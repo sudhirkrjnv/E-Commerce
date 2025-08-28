@@ -79,7 +79,7 @@ function Product(){
                     <div className='scrollingItem' style={{display:'flex', flexDirection:'column', overflowY:'scroll', scrollBehavior:'smooth', height:'100vh'}}>
                         {   
                             filteredItem.map((item, index) => {
-                                console.log(item);
+                                //console.log(item);
                                 return (
                                     <Rightpart key={item._id} id={item._id} img={item.img} name={item.name} stars={item.stars} brought={item.brought} price={item.price} mrp={item.mrp} off={item.off} flatoff={item.flatoff} card={item.card} />
                                 );

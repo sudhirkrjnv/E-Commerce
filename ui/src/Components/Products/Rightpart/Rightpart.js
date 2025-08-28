@@ -1,15 +1,33 @@
 import './Rightpart.css'
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../../../redux/cartSlice';
+import axios from 'axios';
 
 function Rightpart(props){
 
     //let img='https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384',name="HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars='4.5',brought='2k+' , price='25,999',mrp='30,000', off='16', flatoff='3000', card='ICICI', delivery='Tuesday' ;
 
     const dispatch = useDispatch();
+    const user = useSelector((store) => store.auth.user);
+
+    const handleAddToCart = async() => {
+        //dispatch(addToCart(props));
+        //console.log(props);
+        try {
+            const res = await axios.post(`http://localhost:8000/api/v1/cart/addToCart/${user?._id}`, { productId: props.id }, {
+                headers: { 'Content-Type': 'application/json' }, withCredentials: true
+            });
+            if (res.data.success) {
+                console.log("Item added to cart successfully");
+                dispatch(addToCart(props));
+            }
+        } catch (error) {
+            console.error(error.response.data.message);
+        }
+    }
 
     return(
         <div>
@@ -39,7 +57,7 @@ function Rightpart(props){
                     <div className='delivery' style={{marginTop:'10px',fontSize:'1.2em'}}>
                         Free delivery <b>{props.delivery}</b>
                     </div><br/>
-                    <button className='addincart' onClick={()=>dispatch(addToCart(props))}><div>Add to Cart</div></button>
+                    <button className='addincart' onClick={handleAddToCart}><div>Add to Cart</div></button>
                 </div>
             </div>
             <br/>

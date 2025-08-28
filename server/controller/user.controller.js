@@ -18,7 +18,7 @@ export const register = async(req, res)=>{
         })
 
     } catch (error) {
-        console.error(error);
+        res.status(500).json({ message: "Registration failed", error: error.message });
     }
 }
 export const login = async(req, res)=>{
@@ -40,10 +40,11 @@ export const login = async(req, res)=>{
 
         return res.status(200).json({
             message: `Welcome ${user.name}`,
-            success: true
+            success: true,
+            user
         })
         
     } catch (error) {
-        console.error(error);
+        res.status(500).json({ message: "Login failed", error: error.message });
     }
 }

@@ -23,7 +23,7 @@ function Buynow(props){
                             <div style={{fontWeight:'bold', fontSize:'17px'}}>Sub Total</div><div style={{fontSize:'1.2rem', fontWeight:'bolder'}}>₹ {props.subtotalamount}</div>
                         </div>
                         <div className='scrollingItem' style={{borderTop:'1px solid black', borderBottom:'1px solid black', height:'80px', width:'220px', fontSize:'0.8rem', overflowY:'scroll'}}>
-                            {props.items.map((item, index) => {
+                            {/* {props.items.map((item, index) => {
                                 const price = parseFloat((item.price).replace(/,/g, ""));
                                 const words = item.name.split(" ");
                                 const shortName = words.length > 3 ? words.slice(0, 3).join(" ") : item.name;
@@ -31,6 +31,21 @@ function Buynow(props){
                                     <div key={index} style={{display:'flex', justifyContent:'space-between', margin:'5px 0'}}>
                                         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', width:'150px'}}>
                                             <div>{shortName}</div><div>*</div><div>{item.quantity} Q </div>
+                                        </div>
+                                        <div style={{marginLeft:"5px", marginRight:'5px'}}>=</div>
+                                        <span>₹ {price * item.quantity}</span>
+                                    </div>
+                                );
+                            })} */}
+                            {props.items.map((item, index) => {
+                                const price = parseFloat((item?.productId?.price || "0").toString().replace(/,/g, ""));
+                                const words = (item?.productId?.name || "").split(" ");
+                                const shortName = words.length > 3 ? words.slice(0, 3).join(" ") : item?.productId?.name;
+
+                                return (
+                                    <div key={index} style={{display:'flex', justifyContent:'space-between', margin:'5px 0'}}>
+                                        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', width:'150px'}}>
+                                            <div>{shortName}</div><div>*</div><div>{item.quantity} Q</div>
                                         </div>
                                         <div style={{marginLeft:"5px", marginRight:'5px'}}>=</div>
                                         <span>₹ {price * item.quantity}</span>

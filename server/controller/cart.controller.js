@@ -1,4 +1,4 @@
-import { Cart } from "../models/cart.model";
+import { Cart } from "../models/cart.model.js";
 
 
 export const getCart = async (req, res) => {
@@ -10,16 +10,21 @@ export const getCart = async (req, res) => {
       cart = await Cart.create({ userId, items: [] });
     }
 
-    res.status(200).json(cart);
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching cart", error: err.message });
+    res.status(200).json({
+      success: true,
+      message: "Cart item found",
+      cart
+    })
+
+  } catch (error) {
+    res.status(500).json({ message: "Unable to fetch cart", error: error.message });
   }
 };
 
 export const addToCart = async(req, res)=>{
     try {
         const { userId } = req.params;
-        const { productId, quantity } = req.body;
+        const { productId } = req.body;
 
         let cart = await Cart.findOne({ userId });
         if (!cart) {
@@ -27,12 +32,9 @@ export const addToCart = async(req, res)=>{
         }
 
         const existingItem = cart.items.find(cartItem => cartItem.productId.toString() === productId);
-
-        if (existingItem) {
-            existingItem.quantity += quantity || 1;
-        } else {
-            cart.items.push({ productId, quantity: quantity || 1 });
-        }
+        if(!existingItem){
+            cart.items.push({ productId, quantity: 1 });
+        } else res.status(400).json({ message: "Item already in cart" , success: false });
 
         await cart.save();
         res.status(200).json({
@@ -42,7 +44,7 @@ export const addToCart = async(req, res)=>{
         });
 
     } catch (error) {
-        res.status(500).json({ message: "Error updating quantity", error: error.message });
+        res.status(500).json({ message: "Unable to add item in cart", error });
     }
 }
 
@@ -66,8 +68,8 @@ export const updateQuantity = async (req, res) => {
         cart
     });
 
-  } catch (err) {
-    res.status(500).json({ message: "Error updating quantity", error: err.message });
+  } catch (error) {
+    res.status(500).json({ message: "Unable to update quantity in cart", error: error.message });
   }
 }
 
@@ -89,7 +91,7 @@ export const removeIndividualProductFromCart = async(req, res)=>{
         });
 
     } catch (error) {
-        res.status(500).json({ message: "Error removing item", error: error.message });
+        res.status(500).json({ message: "Unable to remove item from cart", error: error.message });
     }
 }
 
@@ -108,7 +110,7 @@ export const clearCart = async (req, res) => {
         cart
     });
 
-  } catch (err) {
-    res.status(500).json({ message: "Error clearing cart", error: err.message });
+  } catch (error) {
+    res.status(500).json({ message: "Unable to cleared item from cart", error: error.message });
   }
 }

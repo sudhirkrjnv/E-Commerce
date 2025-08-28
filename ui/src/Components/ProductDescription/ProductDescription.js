@@ -6,11 +6,14 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { addToCart } from '../../redux/cartSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 function ProductDescription(){
 
     const dispatch = useDispatch();
+
+    const user = useSelector((store) => store.auth.user);
+    //console.log(user._id);
 
     let { id } = useParams();
     // console.log("id:"+id);
@@ -49,8 +52,19 @@ function ProductDescription(){
     },[id]);
 
 
-    const handleAddToCart = ()=>{
-        dispatch(addToCart(itemdetails));
+    const handleAddToCart = async()=>{
+        //dispatch(addToCart(itemdetails));
+        try {
+            const res = await axios.post(`http://localhost:8000/api/v1/cart/addToCart/${user?._id}`, { productId: itemdetails._id }, {
+                headers: { 'Content-Type': 'application/json' }, withCredentials: true
+            });
+            if (res.data.success) {
+                console.log("Item added to cart successfully");
+                dispatch(addToCart(itemdetails));
+            }
+        } catch (error) {
+            console.error(error.response.data.message);
+        }
     }
 
     return(

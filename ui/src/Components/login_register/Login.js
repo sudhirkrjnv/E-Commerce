@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
+import { setAuthUser } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 function Login() {
+
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState({
     email: "", password: ""
@@ -25,6 +29,7 @@ function Login() {
       )
       if(res.data.success){
         console.log(res.data.message);
+        dispatch(setAuthUser(res.data.user));
       }
     } catch (error) {
       console.error(error.response.data.message);
