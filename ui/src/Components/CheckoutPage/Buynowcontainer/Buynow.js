@@ -1,15 +1,32 @@
 import './Buynow.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../../redux/cartSlice';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function Buynow(props){
 
     const dispatch = useDispatch();
 
+    const user = useSelector(store=>store.auth.user);
+
     let totalQuantity = 0;
     props.items.forEach(item => {
         totalQuantity += item.quantity;
     });
+
+    // const handleClearCart = async()=>{
+    //     //dispatch(clearCart());
+    //     try {
+    //         const res = await axios.get(`http://localhost:8000/api/v1/cart/clear/${user._id}`);
+    //         if(res.data.success){
+    //             console.log("cart cleared");
+    //             dispatch(clearCart());
+    //         }
+    //     } catch (error) {
+    //         console.error(error?.response?.data?.message);
+    //     }
+    // }
 
     return(
         <div>
@@ -64,7 +81,7 @@ function Buynow(props){
                 </div>
                 
                 <div className='emptycontainer'>
-                    <div onClick={() => dispatch(clearCart())}>Remove all Items</div> 
+                    <div onClick={props.handleClearCart}>Remove all Items</div>
                 </div>
             </div>
         </div>

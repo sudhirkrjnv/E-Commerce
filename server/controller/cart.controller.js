@@ -48,6 +48,48 @@ export const addToCart = async(req, res)=>{
     }
 }
 
+export const clearCart = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    const cart = await Cart.findOneAndUpdate(
+        { userId }, { $set: { items: [] } },
+        { new: true }
+    );
+
+    res.status(200).json({
+        message: "Cart cleared successfully",
+        success: true,
+        cart
+      });
+
+  } catch (error) {
+    res.status(500).json({ message: "Unable to cleared item from cart", error: error.message });
+  }
+}
+
+export const removeFromCart = async(req, res)=>{
+  try {
+    const { userId, productId } = req.params;
+
+        const cart = await Cart.findOneAndUpdate(
+          { userId }, { $pull: { items: { productId } } },
+            { new: true }
+        );
+
+        if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+        res.status(200).json({
+            message: "Item removed successfully",
+            success: true,
+            cart
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: "Unable to remove item from cart", error: error.message });
+    }
+}
+
 export const updateQuantity = async (req, res) => {
   try {
     const { userId, productId } = req.params;
@@ -70,47 +112,5 @@ export const updateQuantity = async (req, res) => {
 
   } catch (error) {
     res.status(500).json({ message: "Unable to update quantity in cart", error: error.message });
-  }
-}
-
-export const removeIndividualProductFromCart = async(req, res)=>{
-    try {
-        const { userId, productId } = req.params;
-
-        const cart = await Cart.findOneAndUpdate(
-            { userId }, { $pull: { items: { productId } } },
-            { new: true }
-        );
-
-        if (!cart) return res.status(404).json({ message: "Cart not found" });
-
-        res.status(200).json({
-            message: "Item removed successfully",
-            success: true,
-            cart
-        });
-
-    } catch (error) {
-        res.status(500).json({ message: "Unable to remove item from cart", error: error.message });
-    }
-}
-
-export const clearCart = async (req, res) => {
-  try {
-    const { userId } = req.params;
-
-    const cart = await Cart.findOneAndUpdate(
-        { userId }, { $set: { items: [] } },
-        { new: true }
-    );
-
-    res.status(200).json({
-        message: "Cart cleared successfully",
-        success: true,
-        cart
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: "Unable to cleared item from cart", error: error.message });
   }
 }

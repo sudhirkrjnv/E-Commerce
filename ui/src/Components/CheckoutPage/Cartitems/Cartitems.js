@@ -1,13 +1,31 @@
 import './Cartitems.css'
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { useDispatch } from 'react-redux';
-import { decrementQuantity, incrementQuantity, removeFromCart } from '../../../redux/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrementQuantity, incrementQuantity, removeFromCart, setCart } from '../../../redux/cartSlice';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 function Cartitems(props){
 
     const dispatch = useDispatch();
-    
+    const user = useSelector((store) => store.auth.user);
+
+    // const handleRemoveFromCart = async () => {
+    //     //dispatch(removeFromCart(props));
+    //     //console.log(props);
+    //     try {
+    //         const res = await axios.delete(`http://localhost:8000/api/v1/cart/removeFromCart/${user._id}/${props?.id}`);
+    //         if(res.data.success){
+    //             dispatch(removeFromCart(props));
+    //             //dispatch(setCart(res.data.cart.items));
+    //             console.log("Item removed from cart");
+    //         } 
+    //     } catch (error) {
+    //         console.error(error?.response?.data?.message);
+    //     }
+    // };
+
     return(
         <div>
             <div className='rightpartcontainer'>
@@ -39,7 +57,7 @@ function Cartitems(props){
                     <div style={{display:'flex'}}>
                         <div className='soldby'>Soldby : <b>Sudhir Kumar</b></div>
                         <div style={{marginLeft:'18vw',marginBottom:'1.5rem',fontWeight:'bolder', color:'red', outline:'none', border:'none', display:'flex', justifyContent:'center', alignItems:'center', fontSize:'1.5rem', cursor:'pointer'}}
-                            onClick={()=>dispatch(removeFromCart(props))}
+                            onClick={() => props.handleRemoveFromCart(props.id)}
                         >
                             Delete
                         </div>
