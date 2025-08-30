@@ -104,10 +104,13 @@ export const updateQuantity = async (req, res) => {
     item.quantity = quantity;
     await cart.save();
 
+    const populatedCart = await Cart.findOne({ userId })
+      .populate("items.productId");
+
     res.status(200).json({
         message: "Quantity updated successfully",
         success: true,
-        cart
+        cart: populatedCart
     });
 
   } catch (error) {

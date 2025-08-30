@@ -65,9 +65,21 @@ function Cartitems(props){
 
                     
                     <div className='itemnumber'>
-                        <button className='minus' onClick={()=>{ props.quantity > 1 ? dispatch(decrementQuantity(props)) : dispatch(removeFromCart(props))}}> - </button>
+                        <button className='minus' 
+                            onClick={()=>{ 
+                                //props.quantity > 1 ? dispatch(decrementQuantity(props)) : dispatch(removeFromCart(props))
+                                if (props.quantity > 1) {
+                                    dispatch(decrementQuantity(props));
+                                    props.handleUpdateQuantity(props.id, props.quantity - 1);
+                                } else {
+                                    //dispatch(removeFromCart(props));
+                                    //props.handleUpdateQuantity(props.id, 0);
+                                    props.handleRemoveFromCart(props.id)
+                                }
+                            }}
+                        > - </button>
                         <button className='totitem'> {props.quantity} </button>
-                        <button className='plus' onClick={()=>dispatch(incrementQuantity(props))}> + </button>
+                        <button className='plus' onClick={()=>{dispatch(incrementQuantity(props)); props.handleUpdateQuantity(props.id, props.quantity + 1)}}> + </button>
                     </div>
                     
                 </div>

@@ -66,6 +66,21 @@ function Checkout(){
         }
     };
 
+    const handleUpdateQuantity = async (productId, quantity) => {
+        try {
+            const res = await axios.post(`http://localhost:8000/api/v1/cart/updateQuantity/${user?._id}/${productId}`, { quantity }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }, withCredentials: true
+            });
+            if (res.data.success) { 
+                dispatch(setCart(res.data.cart.items)); 
+                console.log("Cart updated");
+            }
+        } catch (error) {
+            console.error(error?.response?.data?.message);
+        }
+    };
 
     return(
         <>
@@ -78,7 +93,7 @@ function Checkout(){
                         cart?.map((item, index)=>{
                             return (
                                 <Cartitems key={index} id={item?.productId?._id} name={item?.productId?.name} img={item?.productId?.img} stars={item?.productId?.stars} price={item?.productId?.price} mrp={item?.productId?.mrp} off={item?.productId?.off} flatoff={item?.productId?.flatoff} card={item?.productId?.card} delivery={item?.productId?.delivery} availibility={item?.productId?.availibility}  
-                                    quantity={item.quantity} handleRemoveFromCart={handleRemoveFromCart}
+                                    quantity={item.quantity} handleRemoveFromCart={handleRemoveFromCart} handleUpdateQuantity={handleUpdateQuantity}
                                 />
                             )
                         })
