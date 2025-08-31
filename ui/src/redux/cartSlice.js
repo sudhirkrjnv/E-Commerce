@@ -10,17 +10,17 @@ const cartSlice = createSlice({
         setCart: (state, action) => {
             state.cart = action.payload;
         },
-        addToCart: (state, action)=>{
-            const isAlreadyPresent = state.cart.find(item => item.id === action.payload.id);
-            if (isAlreadyPresent) {
-                state.cart = state.cart.map(item => item.id === action.payload.id
-                    ? { ...item, quantity: (item.quantity) + 1 }
-                    : item
-                );
+
+        addToCart: (state, action) => {
+            const existingIndex = state.cart.findIndex(item => item.id === action.payload.id);
+
+            if (existingIndex >= 0) {
+                state.cart[existingIndex].quantity += 1;
             } else {
-                state.cart.push({ ...action.payload, quantity: 1 });
+                state.cart = [{ ...action.payload, quantity: 1 }, ...state.cart];
             }
         },
+
         incrementQuantity : (state, action)=>{
             state.cart = state.cart.map(item => item.id === action.payload.id
                 ? { ...item, quantity: (item.quantity) + 1 }
