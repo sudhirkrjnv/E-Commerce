@@ -42,7 +42,7 @@ function Navbar() {
             <div className="returns">Returns</div>
             <div className="&orders textbottom">& Orders</div>
           </div>
-          <Link className="link" to="/checkout/">
+          <Link className="link" to="/cart/">
             <diV className="cartbox">
               <div className="cartlogo"></div>
               <div className="cartitem">{cart.length}</div>

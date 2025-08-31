@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Buynow from './Buynowcontainer/Buynow';
 import Cartitems from './Cartitems/Cartitems';
-import './Checkout.css'
+import './Cart.css'
 import { useSelector , useDispatch} from 'react-redux';
 import axios from 'axios';
 import { clearCart, setCart , removeFromCart} from '../../redux/cartSlice';
 
-function Checkout(){
+function Cart(){
 
     //const {cart} = useSelector(store=>store.cart);
     const user = useSelector((store) => store.auth.user);
@@ -91,6 +91,7 @@ function Checkout(){
                 <div className='leftcontainer scrollingItem' style={{overflowY:'scroll', height:'82vh'}}>
                     {   
                         cart?.map((item, index)=>{
+                            //console.log(item);
                             return (
                                 <Cartitems key={index} id={item?.productId?._id} name={item?.productId?.name} img={item?.productId?.img} stars={item?.productId?.stars} price={item?.productId?.price} mrp={item?.productId?.mrp} off={item?.productId?.off} flatoff={item?.productId?.flatoff} card={item?.productId?.card} delivery={item?.productId?.delivery} availibility={item?.productId?.availibility}  
                                     quantity={item.quantity} handleRemoveFromCart={handleRemoveFromCart} handleUpdateQuantity={handleUpdateQuantity}
@@ -114,4 +115,4 @@ function Checkout(){
         </>
     );
 }
-export default Checkout;
+export default Cart;

@@ -2,7 +2,7 @@ import Navbar from "./Components/HomePage/Navbar/Navbar";
 import HomePage from "./Components/HomePage/HomePage";
 import Product from "./Components/Products/Product";
 import ProductDescription from "./Components/ProductDescription/ProductDescription";
-import Checkout from "./Components/CheckoutPage/Checkout";
+import Cart from "./Components/CartPage/Cart.js";
 import Login from "./Components/login_register/Login";
 import Register from "./Components/login_register/Register";
 import Admin from "./Components/Admin/Admin.js";
@@ -19,7 +19,7 @@ function App(){
                     <Route path="/" element={<HomePage />} />
                     <Route path="/product/:type/" element={<Product />} />
                     <Route path="/productdescription/:id" element={<ProductDescription />} />
-                    <Route path="/checkout/" element={<Checkout />} />
+                    <Route path="/cart/" element={<Cart />} />
                     <Route path="/login/" element={<Login/>} />
                     <Route path="/register/" element={<Register/>} />
                     <Route path="/admin" element={<Admin/>} />

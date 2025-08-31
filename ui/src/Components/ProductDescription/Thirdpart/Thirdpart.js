@@ -27,7 +27,7 @@ function Thirdpart(props){
                     <br/>
                     <div>
                         <button className='addtocarts' onClick={props.addToCart}> Add to Cart</button>
-                        <Link className='link' to='/checkout/'>
+                        <Link className='link' to='/cart/'>
                             <button className='buynow'> Buy Now</button>
                         </Link>
                     </div>

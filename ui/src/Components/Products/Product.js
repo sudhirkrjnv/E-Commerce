@@ -11,7 +11,7 @@ function Product(){
 
     let { type } = useParams();
     //console.log(type);
-    const items = useSelector(store=>store.products.products) || [];
+    //const items = useSelector(store=>store.products.products) || [];
     //console.log(items);
 
     const dispatch = useDispatch();
@@ -37,8 +37,11 @@ function Product(){
     /*let item={ 
                img:'https://ik.imagekit.io/sudhirkumarjnv2k12/Amazon/New%20Folder/81dT7CUY6GL._SL1500_-removebg-preview.png?updatedAt=1704121494384', name:"HONOR X9b 5G (Midnight Black, 8GB + 256GB) | India's First Ultra-Bounce Anti-Drop Curved AMOLED Display | 5800mAh Battery | 108MP Primary Camera | Without Charger", stars:'4.5', brought:'2k+', price:'25,999', mrp:'30,000', off:'16', flatoff:'3000', card:'ICICI'
             }*/
+
+    const [items, setItems] = useState([]);
+    //console.log(items);
     
-    let item = items.filter((item) => item.type === type);
+    //let item = items?.filter((item) => item.type === type);
 
     const [listsOfitem, setlistOfitem]= useState([]);
     const [selectedBrand, setSelectedBrand] = useState([]);
@@ -48,23 +51,28 @@ function Product(){
             try {
                 const res = await axios.get('http://localhost:8000/api/v1/product/getProduct');
                 if(res.data.success){
-                    dispatch(setProducts(res.data.products));
+                    dispatch(setProducts(res?.data?.products));
+                    //console.log(res?.data?.products);
+                    setItems(res?.data?.products);
                 }
             } catch (error) {
-                console.error(error.response.data.message);
+                console.error(error?.response?.data?.message);
             }
         };
         getproducts();
 
-        setlistOfitem(item);
+    },[dispatch]);
 
-    },[dispatch, type]);
+    useEffect(()=>{
+        let fileterByType = items?.filter((item) => item.type === type);
+        setlistOfitem(fileterByType);
+    },[items, type]);
 
     const brands = [...new Set(listsOfitem.map(item=>item.brand))];
     //console.log(brands);
 
     const filteredItem = selectedBrand.length > 0 
-        ? listsOfitem.filter(item=>selectedBrand.includes(item.brand)) 
+        ? listsOfitem?.filter((item)=>selectedBrand.includes(item.brand)) 
         : listsOfitem ;
 
     return(
